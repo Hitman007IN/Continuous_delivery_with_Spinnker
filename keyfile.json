@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "flawless-mason-258102",
+  "private_key_id": "e24cff4ecdf61617d500237f93596d3a98b157f5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDf8tIKGiVgoHrM\nxACoG5RAH6wxriJxopTc0M+dgKzOtdWfRHyXe5OSf8a9c9yjYaCL4EgqWeErFYyB\nYRgcC+4Ks49OYIVy4GUSTWgj4OMfBfOD+60aGOjo2sYS8Dgfn9IEzgu7q2z/2sqW\nkVLwhDsy++m6b4K7Btkn1bNVk9AkgujEziag4nRORAqWu3WmsHa1txcbV7m730+F\nfX45RFDcih/OxPPraJ8JKzgyP7zS+P/34+CZtGNdbXK8+iP9R/PjdY1Kk3vrJPsP\nbPg4Sl+jhpJKG4UTg2mFUJhAxRVlg16qdD5IjKfdLiHczffK6GLSAhHB/bUYFDAd\nH6ZwUT8TAgMBAAECggEAGa9TWLZD+C+ftfF688zp9WrMiIwkxiyz7xmB3loeN70S\nKaiks4kIVWKTTDJIKXLug2xvSnAxi4v2p/YXWkwh+pc6he47EABdhzpaidbmpa28\njrQkV9xohiBlXFGx1iqx3zw0i0svfq680oULYqt/0Kqk1W2prEKuUEvJvDRuSGmG\nSeSvKQ6Xnac0eZP+IcfVxvxT27qnZmWa+0ZzWNYxX42GGoGGdYEoud0aCSrGwh/G\nimoo6HGUYqe1GgA9f6hk3CKKKHcKvfODx0Appw3GzvXjWlXakkRTIpSVdJO49Q24\nBJPtcm+VbRmiO8SGAd+VOx3+QbmGRa+AWKL3FxOnnQKBgQD5U6r/GY45CmS8DJSi\n2lQEeUz1i2/n/csJezAzogTOUhMk8g79KluIxEIzXg+YycQV39lxSVs12vm48eN+\nfmK6bm43SH2zq0iasQXR63wlIP6u1bX8RQNSgr4lAyIHdtIGAOI+hG17s7etZaH8\n1OWGdQA+whirCO1PsiLdigVVxwKBgQDl8UQWSW+xl7rtlTALzYDRklLFuMIYYL3w\njsY+4ciWfaDVFyIz409SnrGtaKewNOtkzMPNwRlgC1RiHrCxUULD51CnW0Kc8cXw\n8Anmp45+MWFFymvN6DNx3TPaCmPXQl5GhCRY4nMhlKAdMbfMOCZHKeUVTcswZtwm\nwseG14YcVQKBgCc99vz9vbfWnfJHHKHhMTYfDXDcSHnAJVPRss19o7oBiwfWnWtV\nXmDRWwYQuO24XAeBWw0MmbGJTKLCV6cSJ2Hmfaxv2XEM9Xl7gUoAAWMqpUtJUcJp\n7lLvRxQ2QQXhur69Jt7mIwFEURWWmH9d1t5pzecSz6Uj244eoIQz9BEDAoGADXkV\nhDjJUp6RVVpodkiUQ7NPJkatGMCSYIX9F7IjDq5Nvi6c0m1/OFgUERUQvkJbiIx2\n7Jdj5TzEtPsXX0xjnRbwot22CXwhHPzzl5A5ySsbh/tUVbxFR2auoxf4waQh4f/c\nIVkjZdRPjWZcXprroz/RLG5ieXONcrf2+O+n7AECgYEA19UH7khSBUgZb2tlClj/\n04JKywp1OG3CXEiHa10EdRsFCKPppuvqcCH344Jzs/Mgr4KvgjG5s/UFZJyh3COj\nXYg0agmvc1RW7TPel7ZKVdwhqDs4jaEV1R039Qz8dFoaXMvbzTiZH0982w118eZs\n90Rl1wsksRigEUSV8/ATSqA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "spinnaker-storage-account@flawless-mason-258102.iam.gserviceaccount.com",
+  "client_id": "116299770074651206631",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spinnaker-storage-account%40flawless-mason-258102.iam.gserviceaccount.com"
+}

@@ -4,13 +4,13 @@
 
 Step 1 :- create cluster
 - gcloud container clusters create spinnaker-cd \
---num-nodes 2 \
---machine-type n1-standard-2 \
+--num-nodes 6 \
+--machine-type n1-standard-4 \
 --zone=us-east1-b \
 --scopes "https://www.googleapis.com/auth/source.read_write,cloud-platform"
 
 Step 2 :- Connect to cluster
-- gcloud container clusters get-credentials jenkins-cd --zone us-east1-b --project flawless-mason-258102
+- gcloud container clusters get-credentials spinnaker-cd --zone us-east1-b --project flawless-mason-258102
 
 # Create Service Account
 
@@ -27,7 +27,7 @@ $ tar zxfv helm-v2.9.0-linux-amd64.tar.gz
 $ sudo chmod +x linux-amd64/helm && sudo mv linux-amd64/helm /usr/bin/helm
 
 Step 3 :- Grant Tiller, the server side of Helm, the cluster-admin role in your cluster
-$ kubectl create clusterrolebinding user-admin-binding \ --clusterrole=cluster-admin --user=$(gcloud config get-value account) 
+$ kubectl create clusterrolebinding user-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account) 
 $ kubectl create serviceaccount tiller --namespace kube-system 
 $ kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
@@ -40,6 +40,25 @@ $ helm repo update
 
 Step 6 :- Ensure that Helm is properly installed 
 $ helm version
+
+# Install Jenkins on GKE
+
+Step 1 :- Configure Jenkins
+- git clone https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes.git
+- cd continuous-deployment-on-kubernetes
+
+Step 2 :- Install Jenkins
+- helm install -n cd stable/jenkins -f jenkins/values.yaml --version 1.2.2 --wait
+- kubectl get pods
+- kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=default:cd-jenkins
+
+Step 3 :- Connect to Jenkins UI
+- export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd" -o jsonpath="{.items[0].metadata.name}")
+- kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+
+Step 3 :- Connect to Jenkins
+- printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+- open browser with port 8080 
 
 # Configure Spinnaker
 
@@ -68,9 +87,9 @@ gcs:
 minio: 
   enabled: false
 
-# Enable Jenkins
+# Disable Jenkins and manually install it
 jenkins:
-  enabled: true
+  enabled: false
  
 # Configure your Docker registries here 
 accounts: 
@@ -81,14 +100,41 @@ accounts:
   email: 1234@5678.com 
 EOF
 '''
+
+# Connect Jenkins
+# Step 1 :- Connect to Jenkins UI
+# - export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master"") 
+# - kubectl port-forward $POD_NAME 9000:8080 >> /dev/null &
+
+# Step 2 :- Get Credentials
+# - kubectl exec -t $JENKINS_POD -- /bin/bash
+# - cat /var/jenkins_home/secrets/initialAdminPassword
+# - open browser with port 9000 
+# - Enter pasword 
+
 # Deploy the Spinnaker chart
 
-Step1 :- helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version 0.3.1
+Step 1 :- helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout 600 --version 0.3.1
 
-Step2 :- Set up port forwarding to the Spinnaker UI 
+Step 2 :- Set up port forwarding to the Spinnaker UI 
 $ export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o jsonpath="{.items[0].metadata.name}") 
 
 $ kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
 
+# Configure deployment pipeline
+
+Step 1 :- open in port 8080
+Step 2 :- In the Spinnaker UI, click Actions, then click Create Application
+Step 3 :- n the New Application dialog, enter the following fields:
+Name: servicea
+Owner Email: proofofconceptoncloud@gmail.com
+
+Step 4 :- Create prod Namespace and give permission for default SA
+- kubectl create namespace prod
+- kubectl create clusterrolebinding default-service --clusterrole=cluster-admin --serviceaccount=default:default
+
 # Cost Savings at Night
 gcloud container clusters resize  spinnaker-cd --num-nodes=0 --zone=us-east1-b
+
+# Reference 
+https://medium.com/velotio-perspectives/know-everything-about-spinnaker-how-to-deploy-using-kubernetes-engine-57090881c78f
