@@ -54,11 +54,27 @@ Step 2 :- Install Jenkins
 
 Step 3 :- Connect to Jenkins UI
 - export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd" -o jsonpath="{.items[0].metadata.name}")
-- kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
+- kubectl port-forward $POD_NAME 9000:8080 >> /dev/null &
 
 Step 3 :- Connect to Jenkins
 - printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
-- open browser with port 8080 
+- open browser with port 9000 
+
+# Create Jenkins Pipeline
+
+Step 1 :-  Add your service account credentials
+
+- First we will need to configure our GCP credentials in order for Jenkins to be able to access our code repository
+
+- In the Jenkins UI, Click “Credentials” on the left
+- Click either of the “(global)” links (they both route to the same URL)
+- Click “Add Credentials” on the left
+- From the “Kind” dropdown, select “Google Service Account from metadata”. your project name will be displayed
+- Click “OK”
+
+Google Cloud Sourec Repo - https://source.developers.google.com/p/flawless-mason-258102/r/github_hitman007in_continuous-deployment-on-kubernetes
+
+
 
 # Configure Spinnaker
 
