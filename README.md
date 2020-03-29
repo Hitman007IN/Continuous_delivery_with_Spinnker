@@ -48,7 +48,7 @@ Step 1 :- Configure Jenkins
 - cd continuous-deployment-on-kubernetes
 
 Step 2 :- Install Jenkins
-- helm install -n cd stable/jenkins -f jenkins/values.yaml --version 1.2.2 --wait
+- helm install -n ci stable/jenkins -f jenkins/values.yaml --version 1.2.2 --wait
 - kubectl get pods
 - kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=default:cd-jenkins
 
@@ -135,7 +135,7 @@ Step 1 :- helm install -n cd stable/spinnaker -f spinnaker-config.yaml --timeout
 Step 2 :- Set up port forwarding to the Spinnaker UI 
 $ export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" -o jsonpath="{.items[0].metadata.name}") 
 
-$ kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
+$ kubectl port-forward --namespace default $DECK_POD 8080:8080 >> /dev/null &
 
 # Configure deployment pipeline
 
