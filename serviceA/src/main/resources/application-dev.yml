@@ -1,0 +1,6 @@
+message:
+  default:
+    welcome: Welcome to dev env of ServiceA...
+    goodbye: Goodbye from dev env of ServiceA...
+server:
+  port: 8080

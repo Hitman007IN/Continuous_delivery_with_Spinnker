@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: servicea-deployment
+  labels:
+    app: servicea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicea
+  template:
+    metadata:
+      labels:
+        app: servicea
+        namespace: prod
+    spec:
+      containers:
+        - name: servicea
+          image: gcr.io/servicea:1.0.0
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+                path: /welcome
+                port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20

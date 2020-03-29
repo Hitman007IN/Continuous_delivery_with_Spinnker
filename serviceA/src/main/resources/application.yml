@@ -1,0 +1,6 @@
+message:
+  default:
+    welcome: Welcome to default env of ServiceA and try calling ServiceB with /call...
+    goodbye: Goodbye from default env of ServiceA...
+server:
+  port: 8080
