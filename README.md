@@ -154,3 +154,5 @@ gcloud container clusters resize  spinnaker-cd --num-nodes=0 --zone=us-east1-b
 
 # Reference 
 https://medium.com/velotio-perspectives/know-everything-about-spinnaker-how-to-deploy-using-kubernetes-engine-57090881c78f
+https://blog.opsmx.com/deploying-helm-chart-to-kubernetes-using-spinnaker/
+https://cloud.google.com/solutions/managing-and-deploying-apps-to-multiple-gke-clusters-using-spinnaker
