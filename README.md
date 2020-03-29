@@ -1,4 +1,6 @@
 # Continuous_delivery_with_Spinnker
+
+![alt text](https://github.com/Hitman007IN/Continuous_delivery_with_Spinnker/blob/master/screenshots/ci_cd_pipeline.png)
  
 # Create Cluster on GKE
 
