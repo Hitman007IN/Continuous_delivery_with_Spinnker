@@ -55,11 +55,11 @@ Step 2 :- Install Jenkins
 - kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=default:cd-jenkins
 
 Step 3 :- Connect to Jenkins UI
-- export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd" -o jsonpath="{.items[0].metadata.name}")
+- export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=ci" -o jsonpath="{.items[0].metadata.name}")
 - kubectl port-forward $POD_NAME 9000:8080 >> /dev/null &
 
 Step 3 :- Connect to Jenkins
-- printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+- printf $(kubectl get secret ci-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 - open browser with port 9000 
 
 # Create Jenkins Pipeline
@@ -81,13 +81,10 @@ Google Cloud Sourec Repo - https://source.developers.google.com/p/flawless-mason
 # Configure Spinnaker
 
 Step 1 :- Create a bucket for Spinnaker to store its pipeline configuration 
-export PROJECT=$(gcloud info --format='value(config.project)')
 
 Bucket name -> flawless-mason-258102-spinnaker-config
 Region -> us-east1
 Class -> Standard
-
-export BUCKET=$PROJECT-spinnaker-config
 
 Step 2 :- Create the configuration file 
 rename the service account key file to spinnaker-sa.json
@@ -121,11 +118,11 @@ EOF
 
 # Connect Jenkins
 # Step 1 :- Connect to Jenkins UI
-# - export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master"") 
+# - export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master") 
 # - kubectl port-forward $POD_NAME 9000:8080 >> /dev/null &
 
 # Step 2 :- Get Credentials
-# - kubectl exec -t $JENKINS_POD -- /bin/bash
+# - kubectl exec -it $JENKINS_POD -- /bin/bash
 # - cat /var/jenkins_home/secrets/initialAdminPassword
 # - open browser with port 9000 
 # - Enter pasword 
